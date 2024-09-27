@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(){
-
-      $user = UserModel::all(); //Ambil semua data dari tabel m_user
-      return view('user', ['data' => $user]);
-    }
-
+  public function index()
+  {
+    $user = UserModel::with('level')->get();
+    return view('user',['data' =>$user]);
+  }
+  
     public function tambah(){
       return view('user_tambah');
     }
@@ -46,12 +46,13 @@ class UserController extends Controller
     }
 
 
-  public function hapus($id) {
-  $user = UserModel::find($id);
-  $user->delete();
-  return redirect('/user');
-  
-}
+      public function hapus($id) {
+      $user = UserModel::find($id);
+      $user->delete();
+      return redirect('/user');
+      
+    }
+
 }
 
 
