@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\kategorimodel;
@@ -8,26 +7,26 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 use Yajra\DataTables\Facades\DataTables;
 
-class KategorisController extends Controller
+class BarangController extends Controller
 {
-    // public function index() {
-    //     // Menambahkan data
-    //     // $data = [
-    //     //     'kategori_kode' => 'SNK',
-    //     //     'kategori_nama' => 'Snack/Makanan Ringan',
-    //     //     'created_at' => now()
-    //     // ];
-    //     // DB::table('m_kategori')->insert($data);
-    //     // return 'Insert data baru berhasil';
-    //     // Mengupdate data
-    //     // $row = DB::table('m_kategori')->where('kategori_kode', 'SNK')->update(['kategori_nama' => 'Cemilan']);
-    //     // return 'Update data baru berhasil. Jumlah data yang diupdate : ' .$row. ' baris';
-    //     // Menghapus data
-    //     // $row = DB::table('m_kategori')->where('kategori_kode', 'SNK')->delete();
-    //     // return 'Delete data berhasil. Jumlah data yang dihapus : ' . $row. ' baris';
-    //     // Menampilkan view
-    //     $data = DB::table('m_kategori')->get();
-    //     return view('kategori', ['data' => $data]);
+    //public function index() {
+        // Menambahkan data
+        // $data = [
+        //     'kategori_kode' => 'SNK',
+        //     'kategori_nama' => 'Snack/Makanan Ringan',
+        //     'created_at' => now()
+        // ];
+        // DB::table('m_kategori')->insert($data);
+        // return 'Insert data baru berhasil';
+        // Mengupdate data
+        // $row = DB::table('m_kategori')->where('kategori_kode', 'SNK')->update(['kategori_nama' => 'Cemilan']);
+        // return 'Update data baru berhasil. Jumlah data yang diupdate : ' .$row. ' baris';
+        // Menghapus data
+        // $row = DB::table('m_kategori')->where('kategori_kode', 'SNK')->delete();
+        // return 'Delete data berhasil. Jumlah data yang dihapus : ' . $row. ' baris';
+        // Menampilkan view
+        // $data = DB::table('m_kategori')->get();
+        // return view('kategori', ['data' => $data]);
     public function index(){
         $breadcrumb = (object)[
             'title'=>'Daftar kategori barang',
@@ -73,7 +72,7 @@ class KategorisController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'kategori_kode'=>'required|string|min:3|unique:m_kategoris,kategori_kode',
+            'kategori_kode'=>'required|string|min:3|unique:m_kategori,kategori_kode',
             'kategori_nama'=>'required|string|max:100'
         ]);
         kategorimodel::create([
@@ -108,7 +107,7 @@ class KategorisController extends Controller
     }
     public function update(Request $request, string $kategori_id){
         $request->validate([
-            'kategori_kode'=>'required|string|min:3|unique:m_kategoris,kategori_kode',
+            'kategori_kode'=>'required|string|min:3|unique:m_kategori,kategori_kode',
             'kategori_nama'=>'required|string|max:100'
         ]);
         $kategori = kategorimodel::find($kategori_id);
