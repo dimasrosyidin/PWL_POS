@@ -142,6 +142,32 @@ public function index()
        return redirect('/');
    }
 
+    // Menampilkan halaman confirm hapus
+    public function confirm_ajax(string $id) {
+        $user = UserModel::find($id);
+        return view('user.confirm_ajax', ['user' => $user]);
+    }
+    // Menghapus data user dengan AJAX
+    public function delete_ajax(Request $request, $id) {
+        //cek apakah request dari ajax
+        if($request->ajax() || $request->wantsJson()) {
+            $user = UserModel::find($id);
+            if($user) {
+                $user->delete();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil dihapus'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ]);
+            }
+        }
+        return redirect('/');
+    }
+
   // Menampilkan halaman form tambah user
     public function create() {
       $breadcrumb = (object) [
