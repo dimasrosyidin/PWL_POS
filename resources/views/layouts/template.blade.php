@@ -88,6 +88,7 @@
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js')}}"></script>
+
 <script>
   // Untuk mengirim token Laravel CSRF pada setiap request ajax
   $.ajaxSetup({
