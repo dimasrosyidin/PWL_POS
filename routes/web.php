@@ -43,6 +43,7 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 
 // route user
+Route::middleware(['authorize:ADM'])->group(function(){
 Route::group(['prefix' => 'user'], function() {
     Route::get('/', [UserController::class, 'index']);  
     Route::post('/list', [UserController::class, 'list']);      // menampilkan data user dalam bentuk json untuk datatables
@@ -58,6 +59,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
     Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']); // Untuk hapus data user Ajax
     Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
+});
 });
 
 
@@ -81,6 +83,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::delete('/level/{id}', [LevelController::class, 'destroy']); // menghapus data level
 });
 //route kategori
+Route::middleware(['authorize:ADM,MNG'])->group(function(){
 Route::group(['prefix' =>'kategori'],function(){
     Route::get('/', [KategorisController::class, 'index']);          // menampilkan halaman awal kategori
     Route::post('/list', [KategorisController::class, 'list']);      // menampilkan data kategori dalam json untuk datables
@@ -97,6 +100,7 @@ Route::group(['prefix' =>'kategori'],function(){
     Route::get('/{id}/delete_ajax', [KategorisController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete kategori Ajax
     Route::delete('/{id}/delete_ajax', [KategorisController::class, 'delete_ajax']); // Untuk hapus data kategori Ajax
     Route::delete('/{id}', [KategorisController::class, 'destroy']); // menghapus data kategori
+});
 });
 //route barang
 // Route::group(['prefix' =>'barang'],function(){
@@ -175,6 +179,7 @@ Route::middleware(['authorize:ADM,MNG'])->group(function(){
 });
 
 //route supplier
+Route::middleware(['authorize:ADM,MNG' ])->group(function(){
 Route::group(['prefix' =>'supplier'],function(){
     Route::get('/', [SupplierController::class, 'index']);          // menampilkan halaman awal supplier
     Route::post('/list', [SupplierController::class, 'list']);      // menampilkan data supplier dalam json untuk datables
@@ -191,5 +196,6 @@ Route::group(['prefix' =>'supplier'],function(){
     Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete supplier Ajax
     Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']); // Untuk hapus data supplier Ajax
     Route::delete('/{id}', [SupplierController::class, 'destroy']); // menghapus data supplier
+});
 });
 });
