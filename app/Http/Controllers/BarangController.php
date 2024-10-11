@@ -37,7 +37,7 @@ class BarangController extends Controller
             $barang->where('kategori_id', $request->kategori_id);
         }
         
-        return response()->json(['message' => 'Route bekerja dengan baik']);
+      //  return response()->json(['message' => 'Route bekerja dengan baik']);
         return DataTables::of($barang) 
             // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex) 
             ->addIndexColumn()  
