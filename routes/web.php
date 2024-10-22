@@ -180,6 +180,8 @@ Route::middleware(['authorize:ADM,MNG'])->group(function(){
     Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete barang Ajax
     Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // Untuk hapus data barang Ajax
     Route::delete('/barang/{id}', [BarangController::class, 'destroy']); // menghapus data barang
+    Route::get('barang/import',[BarangController::class,'import']);
+    Route::post('barang/import_ajax',[BarangController::class,'import_ajax']);
 });
 
 //route supplier
