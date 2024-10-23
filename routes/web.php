@@ -209,14 +209,36 @@ Route::group(['prefix' =>'supplier'],function(){
 });
 
     //route stok
-    Route::group(['prefix' =>'stok'],function(){
-        Route::get('/',[StokController::class,'index']);
-        Route::post('/list',[StokController::class, 'list']);
-        Route::get('/create',[StokController::class,'create']);
-        Route::post('/',[StokController::class,'store']);
-        Route::get('/{id}',[StokController::class,'show']);
-        Route::get('/{id}/edit',[StokController::class,'edit']);
-        Route::put('/{id}',[StokController::class,'update']);
-        Route::delete('/{id}',[StokController::class,'destroy']);
+    // Route::group(['prefix' =>'stok'],function(){
+    //     Route::get('/',[StokController::class,'index']);
+    //     Route::post('/list',[StokController::class, 'list']);
+    //     Route::get('/create',[StokController::class,'create']);
+    //     Route::post('/',[StokController::class,'store']);
+    //     Route::get('/{id}',[StokController::class,'show']);
+    //     Route::get('/{id}/edit',[StokController::class,'edit']);
+    //     Route::put('/{id}',[StokController::class,'update']);
+    //     Route::delete('/{id}',[StokController::class,'destroy']);
+    // });
+    Route::group(['prefix' =>'stok', 'middleware'=>'authorize:ADM,MNG'],function(){
+        Route::get('/', [StokController::class, 'index']);          // menampilkan halaman awal stok
+        Route::post('/list', [StokController::class, 'list']);      // menampilkan data stok dalam json untuk datatables
+        Route::get('/create', [StokController::class, 'create']);   // menampilkan halaman form tambah stok
+        Route::post('/', [StokController::class, 'store']);         // menyimpan data stok baru
+        Route::get('/create_ajax', [StokController::class, 'create_ajax']); // Menampilkan halaman form tambah stok Ajax
+        Route::post('/ajax', [StokController::class, 'store_ajax']); // Menyimpan data stok baru Ajax
+        Route::get('/{id}', [StokController::class, 'show']);       // menampilkan detail stok
+        Route::get('/{id}/show_ajax', [StokController::class, 'show_ajax']); // Menampilkan detail stok Ajax
+        Route::get('/{id}/edit', [StokController::class, 'edit']);  // menampilkan halaman form edit stok
+        Route::put('/{id}', [StokController::class, 'update']);     // menyimpan perubahan data stok
+        Route::get('/{id}/edit_ajax', [StokController::class, 'edit_ajax']); // Menampilkan halaman form edit stok Ajax
+        Route::put('/{id}/update_ajax', [StokController::class, 'update_ajax']); // Menyimpan perubahan data stok Ajax
+        Route::get('/{id}/delete_ajax', [StokController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete stok Ajax
+        Route::delete('/{id}/delete_ajax', [StokController::class, 'delete_ajax']); // Untuk hapus data stok Ajax
+        Route::delete('/{id}', [StokController::class, 'destroy']); // menghapus data stok
+        Route::get('/import', [StokController::class, 'import']); // ajax form upload excel
+        Route::post('/import_ajax', [StokController::class, 'import_ajax']); // ajax import excel
+        Route::get('/export_excel', [StokController::class, 'export_excel']); // ajax export excel
+        Route::get('/export_pdf', [StokController::class, 'export_pdf']); // ajax export pdf
     });
+
 });
