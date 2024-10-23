@@ -27,11 +27,10 @@
             display: block;
         }
 
-        img.image {
+        img {
             width: auto;
-            height: 80px;
-            max-width: 150px;
-            max-height: 150px;
+            height: 110px;
+            
         }
 
         .text-right {
