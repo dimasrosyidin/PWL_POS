@@ -32,17 +32,34 @@
         </div>
 
         @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses!',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            </script>
         @endif
+
         @if(session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: '{{ session('error') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            </script>
         @endif
 
         <table class="table table-bordered table-sm table-striped table-hover" id="table-barang">
             <thead>
                 <tr>
                     <th>Kode Barang</th>
-                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
                     <th>Kategori</th>
@@ -58,6 +75,7 @@
 @endsection
 
 @push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function modalAction(url = '') {
         $('#myModal').load(url, function() {

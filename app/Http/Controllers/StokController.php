@@ -212,6 +212,7 @@ class StokController extends Controller
                 ]);
             }
 
+            
             $stok = StokModel::find($id);
             if ($stok) {
                 $stok->update($request->all());

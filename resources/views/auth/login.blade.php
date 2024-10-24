@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <style>
+      
+        body {
+            background-image: url('img/bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; 
+      }
+
+        .login-box, .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Set transparansi untuk card */
+            border-radius: 20px; /* Lengkungan sudut lebih jelas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+            overflow: hidden; /* Agar konten di dalam mengikuti lengkungan */
+        }
+
+        .login-box {
+            width: 360px;
+            margin: 7% auto;
+        }
+
+        .card-header, .btn {
+            border-radius: 20px; /* Lengkungan pada header dan tombol */
+        }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login Pengguna</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- icheck bootstrap -->
@@ -16,18 +45,21 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 </head>
+
 <body class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
-            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a></div>
+            <div class="card-header text-center">
+                <a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a>
+                <td width="15%" class="text-center"><img class="image" id="image" src="{{ asset('polinema-bw.png') }}"></td>
+            </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form action="{{ url('login') }}" method="POST" id="form-login">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" id="username" name="username" class="form-control"
-                            placeholder="Username">
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -36,8 +68,7 @@
                         <small id="error-username" class="error-text text-danger"></small>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id="password" name="password" class="form-control"
-                            placeholder="Password">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -48,7 +79,8 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember Me</label>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -57,8 +89,8 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                      <!-- Tambahan untuk teks Registrasi -->
-                      <div class="row mt-2">
+                    <!-- Tambahan untuk teks Registrasi -->
+                    <div class="row mt-2">
                         <div class="col-12 text-center">
                             <p>Belum punya akun? <a href="{{ url('register') }}">Registrasi</a></p>
                         </div>
@@ -145,4 +177,5 @@
         });
     </script>
 </body>
+
 </html>

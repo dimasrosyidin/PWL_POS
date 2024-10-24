@@ -1,6 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <style>
+        body {
+            background-image: url('img/bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; 
+      }
+
+        .login-box, .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Set transparansi untuk card */
+            border-radius: 20px; /* Lengkungan sudut lebih jelas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+            overflow: hidden; /* Agar konten di dalam mengikuti lengkungan */
+        }
+
+        .login-box {
+            width: 360px;
+            margin: 7% auto;
+        }
+
+        .card-header, .btn {
+            border-radius: 20px; /* Lengkungan pada header dan tombol */
+        }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Registration</title>

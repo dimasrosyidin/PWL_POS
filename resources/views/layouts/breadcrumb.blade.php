@@ -4,11 +4,17 @@
       <div class="col-sm-6"><h1>{{$breadcrumb->title}}</h1></div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          @foreach($breadcrumb->list as $key => $value)
+          {{-- @foreach($breadcrumb->list as $key => $value)
           @if($key == count($breadcrumb->list)-1)
           <li class="breadcrumb-item active"> {{$value}}</li>
           @else
           <li class="breadcrumb-item"><{{$value}}</li>
+          @endif --}}
+          @foreach ($breadcrumb->list as $key => $value)
+          @if (is_array($value))
+            <li class="breadcrumb-item">{{ $value['name'] }}</li>
+          @else
+            <li class="breadcrumb-item">{{ $value }}</li>
           @endif
           @endforeach
         </ol>

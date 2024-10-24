@@ -9,18 +9,36 @@
             </div>
         </div>
         <div class="card-body">
-            @if (@session('success'))
-                <div class="alert alert-success">{{ session('success')}}</div>
+            @if (session('success'))
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                </script>
             @endif
+
             @if (session('error'))
-                <div class="alert alert-danger">{{session('error')}}</div>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: '{{ session('error') }}',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                </script>
             @endif
+
             <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
                 <thead>
                     <tr>
-                        <th >ID</th>
-                        <th >Nama</th>
-                        <th >Aksi</th>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
             </table>
@@ -28,19 +46,19 @@
     </div>
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"> </div>
 @endsection
-@push('css')
-@endpush
+
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-         function modalAction(url = '') {
+        function modalAction(url = '') {
             $('#myModal').load(url, function() {
                 $('#myModal').modal('show');
             });
         }
+        
         var dataLevel;
         $(document).ready(function() {
             var dataUser = $('#table_user').DataTable({
-                // serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax: {
                     "url": "{{ url('level/list') }}",
@@ -51,7 +69,6 @@
                     }
                 },
                 columns: [{
-                    // nomor urut dari laravel datatable addIndexColumn()
                     data: "DT_RowIndex",
                     className: "text-center",
                     orderable: false,
@@ -68,9 +85,10 @@
                     searchable: false
                 }]
             });
+
             $('#level_id').on('change',function(){
                 dataUser.ajax.reload();
-            })
+            });
         });
     </script>
 @endpush
