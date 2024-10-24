@@ -15,6 +15,7 @@
                 <a href="{{ url('/stok') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
+        
     </div>
 @else
     <div id="modal-master" class="modal-dialog modal-lg" role="document">

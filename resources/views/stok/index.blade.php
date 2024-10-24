@@ -12,10 +12,26 @@
         </div>
         <div class="card-body">
             @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                </script>
             @endif
             @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: '{{ session('error') }}',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                </script>
             @endif
             <div class="row">
                 <div class="col-md-12">
@@ -53,9 +69,9 @@
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static"
     data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
-@push('css')
-@endpush
+
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function modalAction(url = '') {
             $('#myModal').load(url, function() {
@@ -123,42 +139,6 @@
 
             $('#supplier_id').on('change', function() {
                 dataStok.ajax.reload();
-            });
-
-            // Handle AJAX form submission
-            $(document).on('submit', '#form-edit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var url = form.attr('action');
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: form.serialize(),
-                    success: function(response) {
-                        if (response.status) {
-                            $('#myModal').modal('hide');
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Berhasil',
-                                text: response.message
-                            });
-                            dataStok.ajax.reload();
-                        } else {
-                            $('.error-text').text('');
-                            $.each(response.msgField, function(prefix, val) {
-                                $('#error-' + prefix).text(val[0]);
-                            });
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Terjadi Kesalahan',
-                                text: response.message
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText);
-                    }
-                });
             });
         });
     </script>

@@ -28,6 +28,7 @@
                     </select>
                     <small id="error-barang_id" class="error-text form-text text-danger"></small>
                 </div>
+                
                 <div class="form-group">
                     <label>Nama Pekerja</label>
                     <select class="form-control" id="user_id" name="user_id" required>

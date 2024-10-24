@@ -131,6 +131,7 @@
                     });
                     return false;
                 },
+                
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     error.addClass('invalid-feedback');

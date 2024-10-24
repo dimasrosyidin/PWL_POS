@@ -16,6 +16,7 @@ class StokModel extends Model
     public function supplier():BelongsTo{
         return $this->belongsTo(SupplierModel::class,'supplier_id', 'supplier_id');
     }
+    
 
     public function barang():BelongsTo{
         return $this->belongsTo(BarangModel::class,'barang_id', 'barang_id');

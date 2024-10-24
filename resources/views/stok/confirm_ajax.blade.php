@@ -46,6 +46,7 @@
                         <th class="text-right col-3">Nama Pekerja :</th>
                         <td class="col-9">{{ $stok->user->nama }}</td>
                     </tr>
+                    
                     <tr>
                         <th class="text-right col-3">Tanggal Stok :</th>
                         <td class="col-9">{{ $stok->stok_tanggal }}</td>

@@ -73,6 +73,7 @@
                 <span class="text-center d-block font-10">Laman: www.polinema.ac.id</span>
             </td>
         </tr>
+        
     </table>
     <h3 class="text-center">LAPORAN DATA STOK BARANG</h3>
     <table class="border-all">

@@ -23,6 +23,7 @@
                         @enderror
                     </div>
                 </div>
+                
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Nama Barang</label>
                     <div class="col-11">
