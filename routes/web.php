@@ -66,9 +66,9 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
     Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']); // Untuk hapus data user Ajax
     Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
-    Route::get('/level/export_excel', [UserController::class, 'exportExcel'])->name('user.export_excel');
-    Route::get('/level/export_pdf', [UserController::class, 'exportPDF'])->name('user.export_pdf');
-    Route::post('/level/import', [UserController::class, 'import'])->name('user.import');
+    Route::get('/export_excel', [UserController::class, 'exportExcel'])->name('user.export_excel');
+    Route::get('/export_pdf', [UserController::class, 'exportPDF'])->name('user.export_pdf');
+    Route::post('/import', [UserController::class, 'import'])->name('user.import');
 });
 });
 

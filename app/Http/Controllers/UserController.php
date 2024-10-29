@@ -271,15 +271,15 @@ public function destroy(string $id)
     }
 }
 
-public function exportPDF()
+public function export_pdf()
 {
     $users = User::with('level')->get();
 
-    $pdf = PDF::loadView('export_pdf', compact('users'));
+    $pdf = PDF::loadView('export_pdf', compact('user'));
     return $pdf->download('user_list.pdf');
 }
 
-public function exportExcel()
+public function export_excel()
 {
     return Excel::download(new UserExport, 'user_list.xlsx');
 }
