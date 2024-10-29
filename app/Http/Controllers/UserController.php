@@ -7,6 +7,9 @@ use App\Models\LevelModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -268,6 +271,33 @@ public function destroy(string $id)
     }
 }
 
+public function exportPDF()
+{
+    $users = User::with('level')->get();
+
+    $pdf = PDF::loadView('export_pdf', compact('users'));
+    return $pdf->download('user_list.pdf');
+}
+
+public function exportExcel()
+{
+    return Excel::download(new UserExport, 'user_list.xlsx');
+}
+
+public function import(Request $request)
+{
+    $request->validate([
+        'file' => 'required|mimes:xlsx'
+    ]);
+
+    try {
+        Excel::import(new UserImport, $request->file('file'));
+        return redirect()->back()->with('success', 'User data imported successfully.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Error importing user data: ' . $e->getMessage());
+    }
+
+}
 }
   
 //     public function tambah(){

@@ -205,6 +205,7 @@ class PenjualanDetailController extends Controller
         }
     }
 
+
     public function store_ajax(Request $request)
     {
         $validator = Validator::make($request->all(), [

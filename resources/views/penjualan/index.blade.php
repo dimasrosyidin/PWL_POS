@@ -4,14 +4,9 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a href="{{ url('/penjualan/export_excel') }}" class="btn btn-sm btn-primary mt-1">
-                    <i class="fa fa-file-excel"></i> Export Penjualan
-                </a>
-                <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-sm btn-warning mt-1">
-                    <i class="fa fa-file-pdf"></i> Export Penjualan
-                </a>
-                <button onclick="modalAction('{{ url('penjualan/import/') }}')" class="btn btn-sm btn-info mt-1"> Import
-                    Penjualan</button>
+                <button onclick="modalAction('{{ url('/level/import') }}')" class="btn btn-sm btn-info mt-1">Import Penjualan</button>
+                <a href="{{url('/level/export_excel')}}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Penjualan(Excel)</a>
+                <a href="{{url('/level/export_pdf')}}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i> Export Penjualan(PDF)</a>
                 <button onclick="modalAction('{{ url('penjualan/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah Penjualan
                 </button>
@@ -32,7 +27,7 @@
                         <label class="col-1 control-label col-form-label">Filter</label>
 
                         <!-- Filter Nama User -->
-                        <div class="col-3">
+                        {{-- <div class="col-3">
                             <select class="form-control" id="user_id" name="user_id">
                                 <option value="">- Semua -</option>
                                 @foreach ($users as $user)
@@ -43,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover table-sm" id="table_penjualan">
