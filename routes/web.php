@@ -274,6 +274,9 @@ Route::group(['prefix' =>'supplier', 'middleware'=>'authorize:ADM,MNG,STF'],func
         Route::post('/import_ajax', [PenjualanDetailController::class, 'import_ajax']);
         Route::get('/export_excel', [PenjualanDetailController::class, 'export_excel']); // Export data penjualan ke Excel
         Route::get('/export_pdf', [PenjualanDetailController::class, 'export_pdf']);     // Export data penjualan ke PDF
+        Route::get('/penjualan/getHargaBarang/{id}', [PenjualanDetailController::class, 'getHargaBarang']);
+        Route::get('/penjualan/getHargaBarang/{barangId}', [PenjualanDetailController::class, 'getHargaBarang']);
+
     });
 
     Route::group(['prefix' =>'profile'],function(){
