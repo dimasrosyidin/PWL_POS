@@ -2,68 +2,69 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class UserModel extends Authenticatable implements JWTSubject
 {
-
     public function getJWTIdentifier(){
-        return $this->getKey();
+        return $this->getKey(); //mengembalikan primary key dari UserModel sebagai identifier untuk JWT
     }
 
     public function getJWTCustomClaims(){
-        return [];
+        return [];  //memungkinkan penambahan klaim khusus ke payload JWT
     }
 
-    protected $table = 'm_user';
-    protected $primaryKey = 'user_id';
-    // protected $fillable = ['level_id', 'username', 'nama', 'password', 'created_at', 'updated_at'];
-    protected $fillable = ['level_id', 'profile_image', 'username', 'nama', 'password'];
-    
+    //use HasFactory;
+
+    protected $table = 'm_user';        //mendefinisikan nama tabel yang digunakan UserModel
+    protected $primaryKey = 'user_id';  //mendefinisikan primary key dari tabel yang digunakan
+    protected $fillable = [
+        'level_id',
+        'username',
+        'nama',
+        'password',
+        'foto',
+        'image',
+        'created_at',
+        'updated_at'
+    ];
+
     protected $hidden = ['password'];
+
     protected $casts = ['password' => 'hashed'];
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($image) => url('/storage/posts/' . $image)
+        );
+    }
+
+    //Relasi tabel m_user ke m_level (many-to-one)
     public function level(): BelongsTo
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
 
-    
+    //Mendapatkan nama role
     public function getRoleName(): string
     {
         return $this->level->level_nama;
     }
+
+    //Memeriksa bila user memiliki role tertentu
     public function hasRole($role): bool
     {
         return $this->level->level_kode == $role;
-        
     }
-    // public function getRole()
-    // {
-    //     return $this->level->level_kode;
-    // }
 
-    // // Nama tabel
-    // protected $table = 'm_user'; 
-    
-    // // Kolom primary key
-    // protected $primaryKey = 'user_id'; 
-    
-    // // Jika kunci utama tidak auto-incrementing, tambahkan:
-    // public $incrementing = false;
-    
-    // // Format primary key (jika bukan integer, misalnya string)
-    // protected $keyType = 'string'; // Ganti sesuai tipe data user_id (misalnya integer)
-    
-    // // Aktifkan timestamps jika menggunakan created_at dan updated_at
-    // public $timestamps = true;
-    // //Jobsheet 4-Prartikum 1
-    // protected $fillable = ['level_id', 'username', 'nama', 'password'];
-    //     public function level(): BelongsTo
-
-
-   
+    //Mendapatkan kode role
+    public function getRole()
+    {
+        return $this->level->level_kode;
+    }
 }
